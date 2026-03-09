@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Player</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: Arial, sans-serif; }
+        body { background: #000; color: white; }
+        .navbar {
+            background: #111;
+            padding: 15px 20px;
+        }
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            margin-right: 20px;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 20px auto;
+            padding: 0 20px;
+        }
+        .video-wrapper {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            margin-bottom: 20px;
+        }
+        .video-wrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        .info {
+            background: #111;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+        .btn {
+            display: inline-block;
+            background: #1a73e8;
+            color: white;
+            padding: 12px 25px;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <a href="index.html">🏠 হোম</a>
+    </div>
+    
+    <div class="container" id="playerContainer"></div>
+
+    <script>
+        const videos = {
+            "vid1": { name: "Jujutsu Kaisen S03E05", driveId: "YOUR_DRIVE_ID_1", size: "308 MB" },
+            "vid2": { name: "Jujutsu Kaisen S03E06", driveId: "YOUR_DRIVE_ID_2", size: "298 MB" },
+            "vid3": { name: "Jujutsu Kaisen S03E07", driveId: "YOUR_DRIVE_ID_3", size: "312 MB" }
+        };
+        
+        const urlParams = new URLSearchParams(window.location.search);
+        const token = urlParams.get('token');
+        const video = videos[token];
+        
+        if (video) {
+            document.getElementById('playerContainer').innerHTML = `
+                <h2>${video.name}</h2>
+                <div class="video-wrapper">
+                    <iframe src="https://drive.google.com/file/d/${video.driveId}/preview" allowfullscreen></iframe>
+                </div>
+                <div class="info">
+                    <p><strong>সাইজ:</strong> ${video.size}</p>
+                    <a href="https://drive.google.com/uc?export=download&id=${video.driveId}" class="btn" target="_blank">📥 ডাউনলোড</a>
+                    <a href="index.html" class="btn" style="background: #333;">🔙 ফিরে যান</a>
+                </div>
+            `;
+        } else {
+            document.getElementById('playerContainer').innerHTML = '<h2>ভিডিও পাওয়া যায়নি</h2>';
+        }
+    </script>
+</body>
+</html>
