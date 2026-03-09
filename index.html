@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Video Site</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: Arial, sans-serif; }
+        body { background: #f5f5f5; }
+        .header {
+            background: #1a73e8;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 0 20px;
+        }
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        .video-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .video-card:hover { transform: scale(1.02); }
+        .video-thumb {
+            height: 180px;
+            background: linear-gradient(135deg, #1a73e8, #4a90e2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 48px;
+        }
+        .video-info {
+            padding: 15px;
+        }
+        .video-title {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        .video-size {
+            color: #666;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🎬 My Video Site</h1>
+        <p>সব ভিডিও দেখুন ফ্রিতে</p>
+    </div>
+    
+    <div class="container">
+        <div class="video-grid" id="videoGrid"></div>
+    </div>
+
+    <script>
+        // আপনার ভিডিও লিস্ট (এখানে যোগ করুন)
+        const videos = [
+            {
+                name: "Jujutsu Kaisen S03E05",
+                size: "308 MB",
+                driveId: "YOUR_DRIVE_ID_1",
+                token: "vid1"
+            },
+            {
+                name: "Jujutsu Kaisen S03E06",
+                size: "298 MB",
+                driveId: "YOUR_DRIVE_ID_2",
+                token: "vid2"
+            },
+            {
+                name: "Jujutsu Kaisen S03E07",
+                size: "312 MB",
+                driveId: "YOUR_DRIVE_ID_3",
+                token: "vid3"
+            }
+        ];
+        
+        const grid = document.getElementById('videoGrid');
+        
+        videos.forEach(video => {
+            const card = document.createElement('div');
+            card.className = 'video-card';
+            card.onclick = () => window.location.href = `player.html?token=${video.token}`;
+            
+            card.innerHTML = `
+                <div class="video-thumb">🎬</div>
+                <div class="video-info">
+                    <div class="video-title">${video.name}</div>
+                    <div class="video-size">${video.size} | HD</div>
+                </div>
+            `;
+            
+            grid.appendChild(card);
+        });
+    </script>
+</body>
+      </html>
